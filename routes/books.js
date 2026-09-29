@@ -7,7 +7,7 @@ const router = express.Router();
 
 const readData=()=>{
     try{
-        const data=fs.readFileSync("./db.json");
+        const data=fs.readFileSync("./../db/books.json");
         //console.log(data);
         //console.log(JSON.parse(data));
         return JSON.parse(data)
@@ -19,7 +19,7 @@ const readData=()=>{
 //Funció per escriure informació
 const writeData=(data)=>{
     try{
-        fs.writeFileSync("./db.json",JSON.stringify(data));
+        fs.writeFileSync("./../db/books.json",JSON.stringify(data));
 
     }catch(error){
         console.log(error);
@@ -57,9 +57,9 @@ router.get("/",(req,res)=>{
 
 //Obtenir llibre per id
 router.get("/:id",(req,res)=>{
-    const data=readData();
-    const id=parseInt(req.params.id);
-    const book=data.books.find((book)=>book.id===id);
+    const data = readData();
+    const id = parseInt(req.params.id);
+    const book = data.books.find((book)=>book.id===id);
     res.json(book);
 })
 
@@ -71,7 +71,7 @@ router.post("/",(req,res)=>{
     const body = req.body;
 
     //todo lo que viene en ...body se agrega al nuevo libro
-    const newBook={
+    const newBook = {
         id:data.books.length+1,
         ...body,
     };
