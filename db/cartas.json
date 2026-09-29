@@ -1,0 +1,14 @@
+{
+    "cartas": [
+        {
+            "id": 1,
+            "name": "Bulbasur",
+            "Tipus": "Planta"
+        },
+        {
+            "id": 2,
+            "name": "Charizard",
+            "Tipus": "Fuego"
+        }
+    ]
+}

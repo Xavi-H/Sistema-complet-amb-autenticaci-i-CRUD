@@ -1,110 +1,108 @@
 import express from "express";
 import fs from "fs"; //treballar amb arxius
-// import bodyParser from "body-parser"; //Ho afegim per entendre que estem rebent un json des de la petició post.
 
-//Creo l'objecte de l'aplicació
 const router = express.Router();
 
-const readData=()=>{
-    try{
-        const data=fs.readFileSync("./../db/reserves.json");
-        return JSON.parse(data)
+// Ruta al JSON relativa a aquest fitxer (no depèn des d'on executis node)
+const DB_PATH = new URL("../db/reserves.json", import.meta.url);
+const CARTAS_PATH = new URL("../db/cartas.json", import.meta.url);
 
-    }catch(error){
+//Funció per llegir informació
+const readData = () => {
+    try {
+        const data = fs.readFileSync(DB_PATH);
+        return JSON.parse(data);
+    } catch (error) {
         console.log(error);
     }
 };
 
 //Funció per escriure informació
-const writeData=(data)=>{
-    try{
-        fs.writeFileSync("./../db/reserves.json",JSON.stringify(data));
-
-    }catch(error){
+const writeData = (data) => {
+    try {
+        fs.writeFileSync(DB_PATH, JSON.stringify(data, null, 4));
+    } catch (error) {
         console.log(error);
     }
-}
+};
+
+// Comprova que la carta existeix abans de reservar-la
+const cartaExists = (idCarta) => {
+    const cartas = JSON.parse(fs.readFileSync(CARTAS_PATH)).cartas;
+    return cartas.some((c) => c.id === idCarta);
+};
 
 // ##############################
 //          ENDPOINTS
 // ##############################
 
-/*
-router.get("/",(req,res)=>{
-    // res.send("Wellcome to my first API with Node.js");
-    const user = {name:"Xavi"}
-    const htmlMessage = `
-        <p>Aquest és un text <strong>amb estil</strong> i un enllaç:</p>
-        <a href="https://www.example.com">Visita Example</a>`;
+// GET /reserves -> totes les reserves
+router.get("/", (req, res) => {
     const data = readData();
-    res.render("books",{user, data,htmlMessage})
-
+    res.json(data.reserves);
 });
-*/
 
-//Creem un endpoint per obtenir tots els llibres
-router.get("/",(req,res)=>{
+// GET /reserves/:id -> una reserva
+router.get("/:id", (req, res) => {
     const data = readData();
-    const user = "Xavi";
-    const htmlMessage = `
-        <p>Aquest és un text <strong>amb estil</strong> i un enllaç:</p>
-        <a href="https://www.example.com">Visita Example</a>`;
-    res.render("books",{user, data, htmlMessage});
-    
-    //res.json(data.books);
-})
+    const id = parseInt(req.params.id);
+    const reserva = data.reserves.find((r) => r.id === id);
+    if (!reserva) return res.status(404).json({ error: "Reserva no trobada" });
+    res.json(reserva);
+});
 
-//Obtenir llibre per id
-router.get("/:id",(req,res)=>{
-    const data=readData();
-    const id=parseInt(req.params.id);
-    const book=data.books.find((book)=>book.id===id);
-    res.json(book);
-})
-
-
-//Creem un endpoint del tipus post per afegir un llibre
-
-router.post("/",(req,res)=>{
+// POST /reserves -> crear una reserva
+router.post("/", (req, res) => {
     const data = readData();
-    const body = req.body;
+    const { nameUser, idCarta } = req.body;
+    if (!nameUser || !idCarta) {
+        return res.status(400).json({ error: "nameUser i idCarta són obligatoris" });
+    }
+    if (!cartaExists(Number(idCarta))) {
+        return res.status(400).json({ error: "La carta no existeix" });
+    }
 
-    //todo lo que viene en ...body se agrega al nuevo libro
-    const newBook={
-        id:data.books.length+1,
-        ...body,
+    const newReserva = {
+        id: data.reserves.length ? Math.max(...data.reserves.map((r) => r.id)) + 1 : 1,
+        nameUser,
+        idCarta: Number(idCarta),
     };
-    data.books.push(newBook);
+    data.reserves.push(newReserva);
     writeData(data);
-    res.json(newBook);
+    res.status(201).json(newReserva);
 });
 
-//Creem un endpoint per modificar un llibre
-
-
+// PUT /reserves/:id -> modificar una reserva
 router.put("/:id", (req, res) => {
     const data = readData();
-    const body = req.body;
     const id = parseInt(req.params.id);
-    const bookIndex = data.books.findIndex((book) => book.id === id);
-    data.books[bookIndex] = {
-      ...data.books[bookIndex],
-      ...body,
+    const index = data.reserves.findIndex((r) => r.id === id);
+    if (index === -1) return res.status(404).json({ error: "Reserva no trobada" });
+
+    const { nameUser, idCarta } = req.body;
+    if (idCarta && !cartaExists(Number(idCarta))) {
+        return res.status(400).json({ error: "La carta no existeix" });
+    }
+
+    data.reserves[index] = {
+        ...data.reserves[index],
+        ...(nameUser && { nameUser }),
+        ...(idCarta && { idCarta: Number(idCarta) }),
     };
     writeData(data);
-    res.json({ message: "Book updated successfully" });
-  });
+    res.json(data.reserves[index]);
+});
 
-//Creem un endpoint per eliminar un llibre
+// DELETE /reserves/:id -> eliminar una reserva
 router.delete("/:id", (req, res) => {
     const data = readData();
     const id = parseInt(req.params.id);
-    const bookIndex = data.books.findIndex((book) => book.id === id);
-    //splice esborra a partir de bookIndex, el número de elements 
-    // que li indiqui al segon argument, en aquest cas 1
-    data.books.splice(bookIndex, 1);
-    writeData(data);
-    res.json({ message: "Book deleted successfully" });
-  });
+    const index = data.reserves.findIndex((r) => r.id === id);
+    if (index === -1) return res.status(404).json({ error: "Reserva no trobada" });
 
-  export default router;
+    const [borrada] = data.reserves.splice(index, 1);
+    writeData(data);
+    res.json({ message: "Reserva eliminada", reserva: borrada });
+});
+
+export default router;

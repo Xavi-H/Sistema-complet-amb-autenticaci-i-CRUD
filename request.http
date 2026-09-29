@@ -1,31 +1,52 @@
-GET http://localhost:3000/
-
-GET http://localhost:3000/books
-
-###
-
-GET http://localhost:3000/books/2
+### ---------- CARTAS ----------
+GET http://localhost:3000/cartas
 
 ###
+GET http://localhost:3000/cartas/2
 
-POST http://localhost:3000/books HTTP/1.1
+###
+POST http://localhost:3000/cartas HTTP/1.1
 Content-Type: application/json
 
 {
-    "name": "Charlie & the Chocolate Factory",
-    "author": "Roald Dahl",
-    "year": 1964
+    "name": "Squirtle",
+    "Tipus": "Aigua"
 }
 
 ###
-PUT http://localhost:3000/books/3 HTTP/1.1
+PUT http://localhost:3000/cartas/3 HTTP/1.1
 Content-Type: application/json
 
 {
-  "name": "Charlie And The Chocolate Factory",
-  "year":1964
+    "name": "Squirtle",
+    "Tipus": "Agua"
 }
+
 ###
-DELETE http://localhost:3000/books/3 HTTP/1.1
+DELETE http://localhost:3000/cartas/3 HTTP/1.1
 
+### ---------- RESERVES ----------
+GET http://localhost:3000/reserves
 
+###
+GET http://localhost:3000/reserves/1
+
+###
+POST http://localhost:3000/reserves HTTP/1.1
+Content-Type: application/json
+
+{
+    "nameUser": "Xavi",
+    "idCarta": 2
+}
+
+###
+PUT http://localhost:3000/reserves/3 HTTP/1.1
+Content-Type: application/json
+
+{
+    "idCarta": 1
+}
+
+###
+DELETE http://localhost:3000/reserves/3 HTTP/1.1
