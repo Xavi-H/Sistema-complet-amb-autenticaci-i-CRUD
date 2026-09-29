@@ -1,0 +1,31 @@
+GET http://localhost:3000/
+
+GET http://localhost:3000/books
+
+###
+
+GET http://localhost:3000/books/2
+
+###
+
+POST http://localhost:3000/books HTTP/1.1
+Content-Type: application/json
+
+{
+    "name": "Charlie & the Chocolate Factory",
+    "author": "Roald Dahl",
+    "year": 1964
+}
+
+###
+PUT http://localhost:3000/books/3 HTTP/1.1
+Content-Type: application/json
+
+{
+  "name": "Charlie And The Chocolate Factory",
+  "year":1964
+}
+###
+DELETE http://localhost:3000/books/3 HTTP/1.1
+
+
