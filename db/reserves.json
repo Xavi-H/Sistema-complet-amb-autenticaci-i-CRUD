@@ -1,0 +1,14 @@
+{
+    "reserves": [
+        {
+            "id": 1,
+            "nameUser": "Los 7 hábitos de la gente altamente efectiva",
+            "idBook": 1
+        },
+        {
+            "id": 2,
+            "nameUser": "Padre rico, padre pobre",
+            "idBook": 2
+        }
+    ]
+} 

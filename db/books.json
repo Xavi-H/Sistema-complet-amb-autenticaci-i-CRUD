@@ -12,20 +12,5 @@
             "author": "Robert Kiyosaki",
             "year": 1997
         }
-    ],
-    
-    "products": [
-        {
-            "id": 1,
-            "name": "Los 7 hábitos de la gente altamente efectiva",
-            "category": "Ficción",
-            "price": 15.99
-        },
-        {
-            "id": 2,
-            "name": "Padre rico, padre pobre",
-            "category": "No ficción",
-            "price": 19.99
-        }
     ]
 }
