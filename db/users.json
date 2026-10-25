@@ -1,1 +1,14 @@
-[]
+[
+  {
+    "id": "6769c9d4-c279-44ea-a21e-d5306c9cac52",
+    "username": "xavi",
+    "password": "$2b$10$FFv85P1B2LB/BWtWAz0vqOB3EcBwP.tYodbbCAnovy.jqoOshHkPu",
+    "role": "admin"
+  },
+  {
+    "id": "b9a86af8-0837-4903-ae5d-2e1d14ef1366",
+    "username": "user",
+    "password": "$2b$10$myjdlNbg1m7eLE4bqH6k5Oc7VjHJ/4NEccAbcHrHD5JljNaBSiTdK",
+    "role": "user"
+  }
+]
