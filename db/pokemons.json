@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "name": "Pikachu",
+    "Tipus": "Eléctrico",
+    "ownerId": null,
+    "ownerName": null
+  },
+  {
+    "id": 2,
+    "name": "Charizard",
+    "Tipus": "Fuego",
+    "ownerId": null,
+    "ownerName": null
+  },
+  {
+    "id": 3,
+    "name": "Blastoise",
+    "Tipus": "Agua",
+    "ownerId": null,
+    "ownerName": null
+  }
+]
