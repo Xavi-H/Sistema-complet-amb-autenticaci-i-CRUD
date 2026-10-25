@@ -1,11 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ca">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Login i registre</title>
 </head>
 <body>
-    
+    <%- include('partials/nav') %>
+    <h2>Login</h2>
+    <form action="/login" method="POST">
+        <label for="login-username">Username:</label>
+        <input type="text" id="login-username" name="username" required>
+        <br>
+        <label for="login-password">Password:</label>
+        <input type="password" id="login-password" name="password" required>
+        <br>
+        <button type="submit">Entrar</button>
+    </form>
+
+    <h2>Registre</h2>
+    <form action="/register" method="POST">
+        <label for="register-username">Username:</label>
+        <input type="text" id="register-username" name="username" minlength="3" required>
+        <br>
+        <label for="register-password">Password:</label>
+        <input type="password" id="register-password" name="password" minlength="6" required>
+        <br>
+        <label for="register-confirm">Repeteix el password:</label>
+        <input type="password" id="register-confirm" name="confirmPassword" minlength="6" required>
+        <br>
+        <button type="submit">Registrar-se</button>
+    </form>
 </body>
 </html>

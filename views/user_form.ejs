@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= target && target.id ? "Editar user" : "Nou user" %></title>
+</head>
+<body>
+    <%- include('partials/nav') %>
+    <h1><%= target && target.id ? "Editar user" : "Nou user" %></h1>
+    <form action="<%= target && target.id ? '/users/' + target.id + '?_method=PUT' : '/users' %>" method="POST">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" value="<%= target ? target.username : '' %>" minlength="3" required>
+        <br>
+        <label for="password">Password <%= target && target.id ? "(deixa-ho buit per no canviar-lo)" : "" %>:</label>
+        <input type="password" id="password" name="password" minlength="6" <%= target && target.id ? "" : "required" %>>
+        <br>
+        <label for="role">Rol:</label>
+        <select id="role" name="role">
+            <option value="user" <%= target && target.role === "user" ? "selected" : "" %>>user</option>
+            <option value="admin" <%= target && target.role === "admin" ? "selected" : "" %>>admin</option>
+        </select>
+        <br>
+        <button type="submit">Desar</button>
+    </form>
+    <a href="/users">Tornar al llistat</a>
+</body>
+</html>

@@ -1,11 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ca">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Inici</title>
 </head>
 <body>
-    
+    <%- include('partials/nav') %>
+    <h1>Gestió de Pokemons</h1>
+    <% if (user) { %>
+        <p>Hola <%= user.username %>! Ja has iniciat sessió.</p>
+        <p><a href="/pokemons">Veure els pokemons</a></p>
+    <% } else { %>
+        <p>Inicia sessió o registra't per gestionar els books.</p>
+        <p><a href="/login">Entrar / Registrar-se</a></p>
+    <% } %>
 </body>
 </html>
