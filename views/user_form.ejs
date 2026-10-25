@@ -3,24 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= target && target.id ? "Editar user" : "Nou user" %></title>
+    <title><%= user && user.id ? "Editar user" : "Nou user" %></title>
     <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
     <%- include('partials/nav') %>
     <% if (locals.error) { %><p><strong>Error: <%= error %></strong></p><% } %>
-    <h1><%= target && target.id ? "Editar user" : "Nou user" %></h1>
-    <form action="<%= target && target.id ? '/users/' + target.id + '?_method=PUT' : '/users' %>" method="POST">
+    <h1><%= user && user.id ? "Editar user" : "Nou user" %></h1>
+    <form action="<%= user && user.id ? '/users/' + user.id + '?_method=PUT' : '/users' %>" method="POST">
         <label for="username">Username:</label>
-        <input type="text" id="username" name="username" value="<%= target ? target.username : '' %>" minlength="3" required>
+        <input type="text" id="username" name="username" value="<%= user ? user.username : '' %>" minlength="3" required>
         <br>
-        <label for="password">Password <%= target && target.id ? "(deixa-ho buit per no canviar-lo)" : "" %>:</label>
-        <input type="password" id="password" name="password" minlength="6" <%= target && target.id ? "" : "required" %>>
+        <label for="password">Password <%= user && user.id ? "(deixa-ho buit per no canviar-lo)" : "" %>:</label>
+        <input type="password" id="password" name="password" minlength="6" <%= user && user.id ? "" : "required" %>>
         <br>
         <label for="role">Rol:</label>
         <select id="role" name="role">
-            <option value="user" <%= target && target.role === "user" ? "selected" : "" %>>user</option>
-            <option value="admin" <%= target && target.role === "admin" ? "selected" : "" %>>admin</option>
+            <option value="user" <%= user && user.role === "user" ? "selected" : "" %>>user</option>
+            <option value="admin" <%= user && user.role === "admin" ? "selected" : "" %>>admin</option>
         </select>
         <br>
         <button type="submit">Desar</button>

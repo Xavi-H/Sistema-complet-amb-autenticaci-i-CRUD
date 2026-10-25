@@ -19,7 +19,7 @@
                 <li>
                     <strong><%= pokemon.name %></strong>
                     - Tipus: <%= pokemon.Tipus %>
-                    - Creat per: <%= pokemon.ownerName ?? "Xavi" %>
+                    - Creat per: <%= pokemon.ownerName ?? "Sense propietari" %>
                     - <a href="/pokemons/<%= pokemon.id %>">Veure</a>
                     <% if (user.role === "admin" || pokemon.ownerId === user.id) { %>
                         - <a href="/pokemons/<%= pokemon.id %>/edit">Editar</a>

@@ -29,12 +29,12 @@ Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-  "name": "Squirtle",
+  "name": "cartaDeProva",
   "Tipus": "Agua"
 }
 
 ###
-PUT {{host}}/pokemons/5
+PUT {{host}}/pokemons/6
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
@@ -44,7 +44,7 @@ Authorization: Bearer {{token}}
 }
 
 ###
-DELETE {{host}}/pokemons/5
+DELETE {{host}}/pokemons/7
 Accept: application/json
 Authorization: Bearer {{token}}
 
