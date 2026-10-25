@@ -1,3 +1,117 @@
 body {
-    background-color: red; 
+    font-family: Arial, sans-serif;
+    background-color: #f3f4f6;
+    color: #1f2937;
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 5rem 1rem 2rem; /* espai a dalt perquè el nav és fix */
+}
+
+/*  Menú navegació  */
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.8rem 1.5rem;
+    background-color: #1f2937;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+nav form {
+    margin: 0 0 0 auto; /* el botó de sortir a la dreta */
+}
+
+nav button {
+    background-color: transparent;
+    border: 1px solid white;
+    padding: 0.3rem 0.8rem;
+}
+
+hr {
+    display: none; /* el nav ja separa la capçalera */
+}
+
+/*  Títols i text  */
+h1, h2 {
+    text-align: center;
+}
+
+a {
+    color: #2563eb;
+}
+
+/*  Formularis de la pàgina (centrats)  */
+body > form {
+    max-width: 320px;
+    margin: 1.5rem auto;
+    padding: 1.5rem;
+    background-color: white;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+}
+
+label {
+    display: block;
+    margin-top: 0.8rem;
+    font-weight: bold;
+}
+
+input, select {
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 0.3rem;
+    padding: 0.5rem;
+    border: 1px solid #9ca3af;
+    border-radius: 4px;
+}
+
+/*  Botons  */
+button {
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    background-color: #2563eb;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    opacity: 0.85;
+}
+
+/*  Llistes (pokemons, users, perfil)  */
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    margin: 0.5rem 0;
+    padding: 0.8rem 1rem;
+    background-color: white;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+}
+
+li form {
+    display: inline;
+}
+
+li button {
+    margin: 0 0 0 0.5rem;
+    padding: 0.2rem 0.6rem;
+    background-color: #dc2626; /* botó d'eliminar en vermell */
 }

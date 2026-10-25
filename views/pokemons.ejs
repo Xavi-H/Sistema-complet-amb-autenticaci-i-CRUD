@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cartes Pokémon</title>
+    <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
     <%- include('partials/nav') %>
@@ -18,7 +19,7 @@
                 <li>
                     <strong><%= pokemon.name %></strong>
                     - Tipus: <%= pokemon.Tipus %>
-                    - Creat per: <%= pokemon.ownerName ?? "sistema" %>
+                    - Creat per: <%= pokemon.ownerName ?? "Xavi" %>
                     - <a href="/pokemons/<%= pokemon.id %>">Veure</a>
                     <% if (user.role === "admin" || pokemon.ownerId === user.id) { %>
                         - <a href="/pokemons/<%= pokemon.id %>/edit">Editar</a>

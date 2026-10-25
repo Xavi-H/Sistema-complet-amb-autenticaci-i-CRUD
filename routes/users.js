@@ -17,22 +17,22 @@ router.get("/", (req, res) => {
 
 // GET /users/new -> formulari de creació
 router.get("/new", (req, res) => {
-    res.render("user_form", { target: null });
+    res.render("user_form", { user: null });
 });
 
 // GET /users/:id -> un usuari
 router.get("/:id", (req, res) => {
-    const target = UserRepository.getById(req.params.id);
-    if (!target) return sendError(req, res, 404, "Usuari no trobat");
-    if (wantsJson(req)) return res.json(target);
-    res.render("user_form", { target });
+    const user = UserRepository.getById(req.params.id);
+    if (!user) return sendError(req, res, 404, "Usuari no trobat");
+    if (wantsJson(req)) return res.json(user);
+    res.render("user_form", { user });
 });
 
 // GET /users/:id/edit -> formulari d'edició
 router.get("/:id/edit", (req, res) => {
-    const target = UserRepository.getById(req.params.id);
-    if (!target) return sendError(req, res, 404, "Usuari no trobat");
-    res.render("user_form", { target });
+    const user = UserRepository.getById(req.params.id);
+    if (!user) return sendError(req, res, 404, "Usuari no trobat");
+    res.render("user_form", { user });
 });
 
 // POST /users -> crear
@@ -44,7 +44,7 @@ router.post("/", async (req, res) => {
         res.redirect("/users");
     } catch (error) {
         sendError(req, res, error.status ?? 400, error.message, "user_form", {
-            target: { username, role }
+            user: { username, role }
         });
     }
 });
@@ -58,7 +58,7 @@ router.put("/:id", async (req, res) => {
     // Regla de negoci: un admin no es pot treure a si mateix el rol d'admin
     if (id === req.session.user.id && role !== undefined && role !== "admin") {
         return sendError(req, res, 400, "No et pots treure el rol d'administrador", "user_form", {
-            target: formUser
+            user: formUser
         });
     }
     try {
@@ -67,7 +67,7 @@ router.put("/:id", async (req, res) => {
         if (wantsJson(req)) return res.json(updated);
         res.redirect("/users");
     } catch (error) {
-        sendError(req, res, error.status ?? 400, error.message, "user_form", { target: formUser });
+        sendError(req, res, error.status ?? 400, error.message, "user_form", { user: formUser });
     }
 });
 

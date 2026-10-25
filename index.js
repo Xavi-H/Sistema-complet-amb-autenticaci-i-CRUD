@@ -14,6 +14,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(methodOverride("_method")); // permet PUT i DELETE des dels formularis HTML
+app.use(express.static("public")); // permet utilitzar el css de la carpeta public
 
 app.set("view engine", "ejs"); // Motor de plantilles
 app.set("views", "./views"); // Ubicació de les plantilles

@@ -1,52 +1,69 @@
-### ---------- CARTAS ----------
-GET http://localhost:3000/cartas
+@host = http://localhost:3000
 
-###
-GET http://localhost:3000/cartas/2
-
-###
-POST http://localhost:3000/cartas HTTP/1.1
+### Login (guarda el token per a les peticions següents)
+# @name login
+POST {{host}}/login
 Content-Type: application/json
 
 {
-    "name": "Squirtle",
-    "Tipus": "Aigua"
+  "username": "xavi",
+  "password": "123456"
 }
 
 ###
-PUT http://localhost:3000/cartas/3 HTTP/1.1
+@token = {{login.response.body.token}}
+
+###  POKEMONS 
+GET {{host}}/pokemons
+Accept: application/json
+Authorization: Bearer {{token}}
+
+###
+GET {{host}}/pokemons/2
+Accept: application/json
+Authorization: Bearer {{token}}
+
+###
+POST {{host}}/pokemons
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 {
-    "name": "Squirtle",
-    "Tipus": "Agua"
+  "name": "Squirtle",
+  "Tipus": "Agua"
 }
 
 ###
-DELETE http://localhost:3000/cartas/3 HTTP/1.1
-
-### ---------- RESERVES ----------
-GET http://localhost:3000/reserves
-
-###
-GET http://localhost:3000/reserves/1
-
-###
-POST http://localhost:3000/reserves HTTP/1.1
+PUT {{host}}/pokemons/5
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 {
-    "nameUser": "Xavi",
-    "idCarta": 2
+  "name": "Squirtle",
+  "Tipus": "Agua/Tierra"
 }
 
 ###
-PUT http://localhost:3000/reserves/3 HTTP/1.1
+DELETE {{host}}/pokemons/5
+Accept: application/json
+Authorization: Bearer {{token}}
+
+###  USERS (només admin) 
+GET {{host}}/users
+Accept: application/json
+Authorization: Bearer {{token}}
+
+###
+POST {{host}}/users
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 {
-    "idCarta": 1
+  "username": "maria",
+  "password": "maria123",
+  "role": "user"
 }
 
-###
-DELETE http://localhost:3000/reserves/3 HTTP/1.1
+### Sense token -> 401
+GET {{host}}/pokemons
+Accept: application/json
