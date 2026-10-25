@@ -7,6 +7,7 @@
 </head>
 <body>
     <%- include('partials/nav') %>
+    <% if (locals.error) { %><p><strong>Error: <%= error %></strong></p><% } %>
     <h1><%= target && target.id ? "Editar user" : "Nou user" %></h1>
     <form action="<%= target && target.id ? '/users/' + target.id + '?_method=PUT' : '/users' %>" method="POST">
         <label for="username">Username:</label>

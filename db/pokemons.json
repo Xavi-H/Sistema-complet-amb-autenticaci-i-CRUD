@@ -26,5 +26,12 @@
     "Tipus": "Acero",
     "ownerId": "b9a86af8-0837-4903-ae5d-2e1d14ef1366",
     "ownerName": "user"
+  },
+  {
+    "id": 5,
+    "name": "Groudon",
+    "Tipus": "Terra",
+    "ownerId": "6769c9d4-c279-44ea-a21e-d5306c9cac52",
+    "ownerName": "xavi"
   }
 ]

@@ -1,6 +1,6 @@
 import fs from "node:fs";
 
-// ---- Lectura i escriptura dels fitxers .json (la nostra "base de dades") ----
+// Lectura i escriptura dels fitxers .json
 export const readJSON = (file) => JSON.parse(fs.readFileSync(file, "utf-8"));
 export const writeJSON = (file, data) =>
     fs.writeFileSync(file, JSON.stringify(data, null, 2));

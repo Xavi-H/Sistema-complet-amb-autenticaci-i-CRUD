@@ -82,9 +82,9 @@ router.get("/profile", requireAuth, (req, res) => {
         if (wantsJson(req)) return res.status(401).json({ error: "Usuari inexistent" });
         return res.redirect("/login");
     }
-    const books = readJSON("./db/books.json").filter((b) => b.ownerId === profile.id);
-    if (wantsJson(req)) return res.json({ user: profile, books });
-    res.render("profile", { profile, books });
+    const pokemons = readJSON("./db/pokemons.json").filter((b) => b.ownerId === profile.id);
+    if (wantsJson(req)) return res.json({ user: profile, pokemons });
+    res.render("profile", { profile, pokemons });
 });
 
 export default router;
