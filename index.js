@@ -5,7 +5,7 @@ import { PORT } from "./config.js";
 import { loadUser } from "./middleware.js";
 import { sendError } from "./helpers.js";
 import authRoutes from "./routes/auth.js";
-import booksRoutes from "./routes/books.js";
+import pokemonsRoutes from "./routes/pokemons.js";
 import usersRoutes from "./routes/users.js";
 
 const app = express();
@@ -22,7 +22,7 @@ app.set("views", "./views"); // Ubicació de les plantilles
 app.use(loadUser);
 
 app.use("/", authRoutes);
-app.use("/books", booksRoutes);
+app.use("/pokemons", pokemonsRoutes);
 app.use("/users", usersRoutes);
 
 // Ruta no trobada
