@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil</title>
+</head>
+<body>
+    <%- include('partials/nav') %>
+    <h1>Perfil de <%= profile.username %></h1>
+    <ul>
+        <li>Username: <%= profile.username %></li>
+        <li>Rol: <%= profile.role %></li>
+    </ul>
+
+    <h2>Les meves cartes (<%= pokemons.length %>)</h2>
+    <% if (pokemons.length === 0) { %>
+        <p>Encara no has creat cap carta.</p>
+    <% } else { %>
+        <ul>
+            <% pokemons.forEach(pokemon => { %>
+                <li><%= pokemon.name %> - <%= pokemon.Tipus %></li>
+            <% }) %>
+        </ul>
+    <% } %>
+</body>
+</html>

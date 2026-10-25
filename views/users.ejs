@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Users</title>
+</head>
+<body>
+    <%- include('partials/nav') %>
+    <h1>Llista d'Users</h1>
+    <p><a href="/users/new">Afegir un user nou</a></p>
+
+    <ul>
+        <% users.forEach(u => { %>
+            <li>
+                <strong><%= u.username %></strong>
+                - Rol: <%= u.role %>
+                - <a href="/users/<%= u.id %>/edit">Editar</a>
+                <% if (u.id !== user.id) { %>
+                    <form action="/users/<%= u.id %>?_method=DELETE" method="POST">
+                        <button type="submit">Eliminar</button>
+                    </form>
+                <% } %>
+            </li>
+        <% }) %>
+    </ul>
+</body>
+</html>

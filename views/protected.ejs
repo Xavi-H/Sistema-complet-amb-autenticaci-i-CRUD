@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pàgina protegida</title>
+</head>
+<body>
+    <%- include('partials/nav') %>
+    <h1>Pàgina protegida</h1>
+    <p>Hola <%= user.username %>! Només els usuaris autenticats poden veure aquesta pàgina.</p>
+    <p>El teu rol és: <strong><%= user.role %></strong></p>
+    <p>La teva sessió caduca: <%= new Date(user.exp * 1000).toLocaleString("ca-ES") %></p>
+    <p><a href="/pokemons">Anar als pokemons</a></p>
+</body>
+</html>

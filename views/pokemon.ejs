@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= pokemon.name %></title>
+</head>
+<body>
+    <%- include('partials/nav') %>
+    <h1><%= pokemon.name %></h1>
+    <ul>
+        <li>Id: <%= pokemon.id %></li>
+        <li>Tipus: <%= pokemon.Tipus %></li>
+        <li>Creat per: <%= pokemon.ownerName ?? "sistema" %></li>
+    </ul>
+    <a href="/pokemons">Tornar al llistat</a>
+</body>
+</html>

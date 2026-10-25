@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= pokemon && pokemon.id ? "Editar carta" : "Nova carta" %></title>
+</head>
+<body>
+    <%- include('partials/nav') %>
+    <% if (locals.error) { %><p><strong>Error: <%= error %></strong></p><% } %>
+    <h1><%= pokemon && pokemon.id ? "Editar carta" : "Nova carta" %></h1>
+
+    <form action="<%= pokemon && pokemon.id ? '/pokemons/' + pokemon.id + '?_method=PUT' : '/pokemons' %>" method="POST">
+        <label for="name">Nom:</label>
+        <input type="text" id="name" name="name" value="<%= pokemon ? pokemon.name : '' %>" required>
+        <br>
+        <label for="Tipus">Tipus:</label>
+        <input type="text" id="Tipus" name="Tipus" value="<%= pokemon ? pokemon.Tipus : '' %>" required>
+        <br>
+        <button type="submit">Desar</button>
+    </form>
+    <a href="/pokemons">Tornar al llistat</a>
+</body>
+</html>
