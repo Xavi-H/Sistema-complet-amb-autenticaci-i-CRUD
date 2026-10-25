@@ -9,6 +9,12 @@
     "id": "b9a86af8-0837-4903-ae5d-2e1d14ef1366",
     "username": "user",
     "password": "$2b$10$myjdlNbg1m7eLE4bqH6k5Oc7VjHJ/4NEccAbcHrHD5JljNaBSiTdK",
+    "role": "admin"
+  },
+  {
+    "id": "86f59898-e0b2-43ff-8a87-3a10632547b4",
+    "username": "userProva",
+    "password": "$2b$10$rbE12/LAa1pLorEDRREMlurhuHTaWN4kb0wxS6EmjjfFG4gPFqCF.",
     "role": "user"
   }
 ]

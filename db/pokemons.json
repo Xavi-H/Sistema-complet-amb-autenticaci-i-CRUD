@@ -19,5 +19,12 @@
     "Tipus": "Agua",
     "ownerId": null,
     "ownerName": null
+  },
+  {
+    "id": 4,
+    "name": "prova",
+    "Tipus": "Acero",
+    "ownerId": "b9a86af8-0837-4903-ae5d-2e1d14ef1366",
+    "ownerName": "user"
   }
 ]
