@@ -1,0 +1,17 @@
+<nav>
+    <a href="/">Inici</a>
+    <% if (user) { %>
+        | <a href="/protected">Zona privada</a>
+        | <a href="/profile">Perfil</a>
+        | <a href="/pokemons">Pokemons</a>
+        <% if (user.role === "admin") { %>
+            | <a href="/users">Users</a>
+        <% } %>
+        <form action="/logout" method="POST">
+            <button type="submit">Tancar sessió (<%= user.username %>)</button>
+        </form>
+    <% } else { %>
+        | <a href="/login">Entrar / Registrar-se</a>
+    <% } %>
+</nav>
+<hr>
