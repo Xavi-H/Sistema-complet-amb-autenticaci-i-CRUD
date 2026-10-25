@@ -1,28 +1,35 @@
 import express from "express";
-import bodyParser from "body-parser"; //Ho afegim per entendre que estem rebent un json des de la petició post.
-import cartasRoutes from "./routes/cartas.js";
-import reservesRoutes from "./routes/reserves.js";
+import methodOverride from "method-override";
+import cookieParser from "cookie-parser";
+import { PORT } from "./config.js";
+import { loadUser } from "./middleware.js";
+import { sendError } from "./helpers.js";
+import authRoutes from "./routes/auth.js";
+import booksRoutes from "./routes/books.js";
+import usersRoutes from "./routes/users.js";
 
-//Creo l'objecte de l'aplicació
 const app = express();
-app.use(bodyParser.json());
 
-// #############################
-//          RUTES
-// #############################
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
+app.use(methodOverride("_method")); // permet PUT i DELETE des dels formularis HTML
 
-app.use("/cartas", cartasRoutes);
-app.use("/reserves", reservesRoutes);
+app.set("view engine", "ejs"); // Motor de plantilles
+app.set("views", "./views"); // Ubicació de les plantilles
 
-// #############################
-//            EJS
-// #############################
+// Middleware d'autenticació: carrega l'usuari del JWT a req.session.user
+app.use(loadUser);
 
-app.use(express.static("public")); //carpeta publica pel css
-app.set("view engine", "ejs"); //Fem servir el motor ejs
-app.set("views", "./views"); //carpeta on desem els arxius .ejs
+app.use("/", authRoutes);
+app.use("/books", booksRoutes);
+app.use("/users", usersRoutes);
 
-//Funció per escoltar
-app.listen(3000, () => {
-    console.log("Server listening on port 3000");
+// Ruta no trobada
+app.use((req, res) => {
+    sendError(req, res, 404, "Ruta no trobada");
+});
+
+app.listen(PORT, () => {
+    console.log(`Servidor funcionant a http://localhost:${PORT}`);
 });
